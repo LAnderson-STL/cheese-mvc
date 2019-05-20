@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+
+<h1 th:text="${title}">Default title</h1>
+
+<!--action attribute when submitted, browser will send request to spec url. default is to submit form to same url form lives at (common)   -->
+<form method ="post">
+    <input type="text" name="cheeseName" />
+    <input type="submit" value="Add Cheese" />
+</form>
+
+</body>
+</html>
