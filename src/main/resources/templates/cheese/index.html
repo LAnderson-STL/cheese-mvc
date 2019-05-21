@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" >
-<head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Title</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 
 <h1 th:text="${title}">Default title</h1>
 
+<nav th:replace="fragments :: navigation"></nav>
+
 <!--unless cheeses exists and size is not 0-->
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
-<a href="/cheese/add">Add Cheese</a>
 
 <ul>
     <!--loop over the list of cheeses.  always add loop inside html tag. curly brackets tells java to look in the mode for the value -->
