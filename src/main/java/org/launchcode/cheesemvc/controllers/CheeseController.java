@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 //add annotation so spring recognizes it as controller
@@ -19,7 +20,10 @@ import java.util.ArrayList;
 public class CheeseController {
 
     //static member of class. make list accessible to methods.  This data will only exist while app is running.  removed when app stopped.
-    static ArrayList<String> cheeses = new ArrayList<>();
+    //static ArrayList<String> cheeses = new ArrayList<>();
+    HashMap<String, String> cheeses = new HashMap<>();
+
+
 
     //to configure route to configure route. value spec route at which req should be mapped to this handler
     //request path /cheese
@@ -54,9 +58,9 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     //RequestParam - Spring should look for req param with the name cheeseName and insert it here
-    public String processAddCheeseForm(@RequestParam String cheeseName) {
+    public String processAddCheeseForm(@RequestParam String cheeseName, String cheeseDescription) {
         //add cheese to list from form
-        cheeses.add(cheeseName);
+        cheeses.put(cheeseName, cheeseDescription);
         //redirect to /cheese (this handler)
         return "redirect:";
     }

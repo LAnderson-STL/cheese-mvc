@@ -11,12 +11,21 @@
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
 
-<ul>
+
     <!--loop over the list of cheeses.  always add loop inside html tag. curly brackets tells java to look in the mode for the value -->
     <!-- when ever using th: attribute, we want thymeleaf to repeat current li element for each cheese in cheeses.  Then tell how to use value of iterator var -->
-    <li th:each="cheese : ${cheeses}" th:text="${cheese}">
 
-    </li>
-</ul>
+<table>
+    <tr>
+        <th>Cheese</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="cheese : ${cheeses}">
+        <td th:text="${cheese.key}">Key</td>
+        <td th:text="${cheese.value}">Value</td>
+
+    </tr>
+
+</table>
 </body>
 </html>
