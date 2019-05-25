@@ -58,11 +58,35 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     //RequestParam - Spring should look for req param with the name cheeseName and insert it here
-    public String processAddCheeseForm(@RequestParam String cheeseName, String cheeseDescription) {
+    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
         //add cheese to list from form
         cheeses.put(cheeseName, cheeseDescription);
         //redirect to /cheese (this handler)
+
+
         return "redirect:";
     }
+
+    //display delete form   Model gets hashmap of cheeses in
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteForm(Model model) {
+        model.addAttribute("cheeses", cheeses);
+        return "cheese/delete";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String deleteCheese(@RequestParam ArrayList<String> cheese){
+        for(int i = 0; i < cheese.size(); i++) {
+            cheeses.remove(cheese.get(i));
+
+
+        }
+        return "redirect:";
+    }
+
+
+
+
+
 
 }

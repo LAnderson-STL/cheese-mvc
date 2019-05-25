@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" >
+<head th:replace="fragments :: head"></head>
+<body>
+
+<h1 th:text="${title}">Default title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<br />
+
+<!--action attribute when submitted, browser will send request to spec url. default is to submit form to same url form lives at (common)   -->
+<form method="post">
+    <div th:each="cheese : ${cheeses}">
+    <input  name="cheese" type="checkbox" th:value="${cheese.key}"   th:text="${cheese.key}"/>
+    </div>
+    <input type="submit" Value="Remove Cheese" />
+
+</form>
+
+
+
+
+
+</body>
+</html>
