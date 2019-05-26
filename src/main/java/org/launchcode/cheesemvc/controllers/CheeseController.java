@@ -4,6 +4,7 @@ import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,14 +53,15 @@ public class CheeseController {
         return "cheese/add";
     }
 
+    //model binding will reduce amt of code.  model annotation will try to create obj for us
+    //spring will look in descr to see which fields in class have getters and setters and try to match up to data from form
+    //then will inject into class
     @RequestMapping(value = "add", method = RequestMethod.POST)
     //RequestParam - Spring should look for req param with the name cheeseName and insert it here
-    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
+    public String processAddCheeseForm(@ModelAttribute Cheese newCheese) {
         //add cheese to list from form
-        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
         CheeseData.add(newCheese);
         //redirect to /cheese (this handler)
-
 
         return "redirect:";
     }
