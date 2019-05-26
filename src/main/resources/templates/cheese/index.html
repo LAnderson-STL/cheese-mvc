@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" >
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <h1 th:text="${title}">Default title</h1>
 
@@ -15,14 +15,16 @@
     <!--loop over the list of cheeses.  always add loop inside html tag. curly brackets tells java to look in the mode for the value -->
     <!-- when ever using th: attribute, we want thymeleaf to repeat current li element for each cheese in cheeses.  Then tell how to use value of iterator var -->
 
-<table>
+<table class="table">
     <tr>
         <th>Cheese</th>
         <th>Description</th>
     </tr>
+
+    <!--how to access priv field? thymeleaf will call getter and setter when we use this syntax-->
     <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.key}">Key</td>
-        <td th:text="${cheese.value}">Value</td>
+        <td th:text="${cheese.name}">Key</td>
+        <td th:text="${cheese.description}">Value</td>
 
     </tr>
 

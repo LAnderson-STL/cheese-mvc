@@ -10,13 +10,15 @@
 <br />
 
 <!--action attribute when submitted, browser will send request to spec url. default is to submit form to same url form lives at (common)   -->
-<form method ="post">
-    <label>Cheese<input type="text" name="cheeseName" /></label>
-    <br />
-    <br />
-    <label>Description<input type="text" name="cheeseDescription" /></label>
-    <br />
-    <br />
+<form method ="post" style="max-width:600px;">
+    <div class="form-group">
+    <label for="name-field">Cheese</label>
+        <input class="form-control" id="name-field" type="text" name="cheeseName" />
+    </div>
+    <div class="form-group">
+        <label for="desc-field">Description</label>
+            <input class="form-control" id="desc-field" type="text" name="cheeseDescription" />
+    </div>
     <input type="submit" value="Add Cheese" />
 
 </form>

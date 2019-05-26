@@ -1,14 +1,14 @@
 package org.launchcode.cheesemvc.controllers;
 
+import org.launchcode.cheesemvc.models.Cheese;
+import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 //add annotation so spring recognizes it as controller
@@ -18,10 +18,6 @@ import java.util.HashMap;
 @ RequestMapping("cheese")
 
 public class CheeseController {
-
-    //static member of class. make list accessible to methods.  This data will only exist while app is running.  removed when app stopped.
-    //static ArrayList<String> cheeses = new ArrayList<>();
-    HashMap<String, String> cheeses = new HashMap<>();
 
 
 
@@ -36,7 +32,7 @@ public class CheeseController {
     public String index(Model model) {
 
         //passing object ArrayList
-        model.addAttribute("cheeses", cheeses);
+        model.addAttribute("cheeses", CheeseData.getAll());
 
 
         //can use model to pass data into view from controller. Will be key val pair
@@ -60,7 +56,8 @@ public class CheeseController {
     //RequestParam - Spring should look for req param with the name cheeseName and insert it here
     public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
         //add cheese to list from form
-        cheeses.put(cheeseName, cheeseDescription);
+        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
+        CheeseData.add(newCheese);
         //redirect to /cheese (this handler)
 
 
@@ -70,17 +67,18 @@ public class CheeseController {
     //display delete form   Model gets hashmap of cheeses in
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String displayDeleteForm(Model model) {
-        model.addAttribute("cheeses", cheeses);
+        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("title", "Remove Cheese");
         return "cheese/delete";
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String deleteCheese(@RequestParam ArrayList<String> cheese){
-        for(int i = 0; i < cheese.size(); i++) {
-            cheeses.remove(cheese.get(i));
-
-
+    public String deleteCheese(@RequestParam int[] cheeseIds){
+        //for(int i = 0; i < cheese.size(); i++) {
+        for (int cheeseId : cheeseIds) {
+            CheeseData.remove(cheeseId);
         }
+
         return "redirect:";
     }
 
